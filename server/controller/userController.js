@@ -22,7 +22,8 @@ const addToWatchList = async (req, res) => {
 
 const getWatchListData = async (req, res) => {
   const { _id } = req.user;
-  const userWatchlist = await User.findById(_id).select('watchlist').cache(_id);
+  const userWatchlist = await User.findById(_id).select('watchlist')
+  //.cache(_id);
 
   res.status(200).json({
     status: 'Success',

@@ -6,7 +6,7 @@ export const login = (email, password) => async (dispatch) => {
       type: 'USER_LOGIN_START',
     });
     const { data } = await axios.post(
-      'http://localhost:9000/api/v1/auth/login',
+      '/api/v1/auth/login',
       { email, password },
       { withCredentials: true }
     );
@@ -36,9 +36,12 @@ export const getUserByCookies = () => async (dispatch, getState) => {
     //   },
     // };
 
-    const { data } = await axios.get('http://localhost:9000/api/v1/auth/user', {
-      withCredentials: true,
-    });
+    const { data } = await axios.get(
+      '/api/v1/auth/user',
+      {
+        withCredentials: true,
+      }
+    );
 
     dispatch({
       type: 'GET_SESSION_USER_SUCCESS',
@@ -67,7 +70,7 @@ export const addToWatchListAction = (coinId) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      `http://localhost:9000/api/v1/user/${coinId}`,
+      `/api/v1/user/${coinId}`,
       {},
       config
     );
@@ -100,7 +103,7 @@ export const getRenderWatchListData =
       };
 
       const { data } = await axios.get(
-        `http://localhost:9000/api/v1/user/renderWatchList?watchList=${watchListQueryIntoString}`,
+        `/api/v1/user/renderWatchList?watchList=${watchListQueryIntoString}`,
         config
       );
 
@@ -136,7 +139,7 @@ export const addToPortfolioTransactions =
       };
 
       const { dat } = await axios.post(
-        `http://localhost:9000/api/v1/portfolio/`,
+        `/api/v1/portfolio/`,
         { ...obj, user: data._id },
         config
       );
@@ -169,7 +172,7 @@ export const getPortfolioTransactions =
       };
 
       const { data } = await axios.get(
-        `http://localhost:9000/api/v1/portfolio/?coinName=${coinName}`,
+        `/api/v1/portfolio/?coinName=${coinName}`,
         config
       );
 
@@ -201,7 +204,7 @@ export const getPortfolioTransactionsByCoinName =
       };
 
       const { data } = await axios.get(
-        `http://localhost:9000/api/v1/portfolio/transactions/${coinName}`,
+        `/api/v1/portfolio/transactions/${coinName}`,
         config
       );
 
@@ -231,10 +234,9 @@ export const getUserCoinList = (coinName) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.get(
-      `http://localhost:9000/api/v1/portfolio/uniqueCoinName`,
+      `/api/v1/portfolio/uniqueCoinName`,
       config
     );
-    console.log(data);
 
     dispatch({
       type: 'GET_FROM_PORTFOLIO_COIN_SUCCESS',

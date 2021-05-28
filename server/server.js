@@ -8,9 +8,9 @@ const bodyParser = require('body-parser');
 const CryptoRouter = require('./routes/cryptoRoutes');
 const AuthRouter = require('./routes/authRoutes');
 const UserRouter = require('./routes/userRoutes');
-const PortfolioRouter = require('./routes/portfolioRoutes');
+const PortfolioRouter = require('./routes/portFolioRoutes');
 const cookieParser = require('cookie-parser');
-require('./utils/cache');
+// require('./utils/cache');
 require('dotenv').config();
 process.env.UV_THREADPOOL_SIZE = 4;
 
@@ -23,6 +23,7 @@ const corsOptions = {
     'X-Access-Token',
     'Authorization',
   ],
+  paths: '*',
   credentials: true,
   methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
   origin: true,
@@ -65,7 +66,7 @@ if (cluster.isMaster) {
   app.use('/api/v1/user', UserRouter);
   app.use('/api/v1/portfolio', PortfolioRouter);
 
-  app.listen(9000, () => {
+  app.listen(process.env.PORT || 9000, () => {
     console.log('Server started');
   });
 }

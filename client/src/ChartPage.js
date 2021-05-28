@@ -16,28 +16,25 @@ import {
 import axios from 'axios';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
+import './css/ChartPage.css';
 
 const ChartPage = () => {
   const [data, setData] = useState([]);
   const [remainingData, setRemainingData] = useState();
   const user = useSelector((state) => state.user.data);
 
-
   let { id } = useParams();
 
   const fetchGraphData = async () => {
+    const token = user?.token;
 
-    const token=user?.token
-
-    const config={
+    const config = {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
-    const { data } = await axios.get(
-      `http://localhost:9000/api/v1/dbData/${id}`,config
-    );
+    const { data } = await axios.get(`/api/v1/dbData/${id}`, config);
     setRemainingData(data.particularCoinData);
     setData(data.todayPriceData);
   };
@@ -71,7 +68,11 @@ const ChartPage = () => {
                 <Stat>
                   <StatLabel>％24H</StatLabel>
                   <StatHelpText>
-                    {remainingData.percent_change_24h>0?<StatArrow type="increase" />:<StatArrow type="decrease" />}
+                    {remainingData.percent_change_24h > 0 ? (
+                      <StatArrow type="increase" />
+                    ) : (
+                      <StatArrow type="decrease" />
+                    )}
                     {remainingData.percent_change_24h
                       ? remainingData.percent_change_24h?.toFixed(2)
                       : 'NA'}
@@ -81,7 +82,11 @@ const ChartPage = () => {
                 <Stat>
                   <StatLabel>％30d</StatLabel>
                   <StatHelpText>
-                  {remainingData.percent_change_30d>0?<StatArrow type="increase" />:<StatArrow type="decrease" />}
+                    {remainingData.percent_change_30d > 0 ? (
+                      <StatArrow type="increase" />
+                    ) : (
+                      <StatArrow type="decrease" />
+                    )}
                     {remainingData.percent_change_30d
                       ? remainingData.percent_change_30d?.toFixed(2)
                       : 'NA'}
@@ -91,7 +96,11 @@ const ChartPage = () => {
                 <Stat>
                   <StatLabel>％90d</StatLabel>
                   <StatHelpText>
-                  {remainingData.percent_change_90d>0?<StatArrow type="increase" />:<StatArrow type="decrease" />}
+                    {remainingData.percent_change_90d > 0 ? (
+                      <StatArrow type="increase" />
+                    ) : (
+                      <StatArrow type="decrease" />
+                    )}
                     {remainingData.percent_change_90d
                       ? remainingData.percent_change_90d?.toFixed(2)
                       : 'NA'}
@@ -112,7 +121,6 @@ const ChartPage = () => {
                   : 'NA'}
               </Heading>
             </div>
-            <Divider colorScheme="teal" orientation="vertical" height="20vh" />
             <div className="coin-volume_24h">
               <Text fontSize="sm">
                 Volume <Tag colorScheme="teal">24h</Tag>
@@ -124,7 +132,6 @@ const ChartPage = () => {
                   : 'NA'}
               </Heading>
             </div>
-            <Divider colorScheme="teal" orientation="vertical" height="20vh" />
 
             <div className="coin-market_cap--info">
               <div className="coin-market_supply">

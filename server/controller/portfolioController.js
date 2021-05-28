@@ -34,7 +34,7 @@ const getPortfolioCoinNames = async (req, res, next) => {
       user: req.user._id,
     })
       .distinct('coinName')
-      .cache(req.user._id);
+      //.cache(req.user._id);
     res.status(200).json({
       status: 'Success',
       data,
@@ -50,7 +50,8 @@ const getPortfolioTransactionByCoinName = async (req, res, next) => {
     const data = await PortfolioTransaction.find({
       user: req.user._id,
       coinName,
-    }).cache(req.user._id);
+    })
+    //.cache(req.user._id);
 
     res.status(200).json({
       status: 'Success',

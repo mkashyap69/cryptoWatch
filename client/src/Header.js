@@ -5,6 +5,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import LoginButton from './LoginButton';
 import logo from './logo.png';
+import './css/Header.css';
 
 const Header = () => {
   const user = useSelector((state) => state.user.data);
@@ -16,7 +17,7 @@ const Header = () => {
       },
       withCredentials: true,
     };
-    await axios.get('http://localhost:9000/api/v1/auth/logoutUser', config);
+    await axios.get('/api/v1/auth/logoutUser', config);
     window.location.reload();
   };
 

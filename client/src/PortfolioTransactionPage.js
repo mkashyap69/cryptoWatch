@@ -39,7 +39,7 @@ const PortfolioTransactionPage = () => {
   };
 
   const goToHomePage = () => {
-    history.push('/market');
+    history.push('/');
   };
   const portfolioHandler = () => {
     history.push('/portfolio');
@@ -47,7 +47,7 @@ const PortfolioTransactionPage = () => {
   return (
     <div className="portfolio-page">
       <div className="portfolio-page-head">
-        <Heading className="mainPage--heading">Your Portfolio</Heading>
+        <Heading className="mainPage--heading">{`Your ${coinName} Transactions`}</Heading>
         <div className="portfolio-page-buttons">
           <div className="portfolio-tag" onClick={portfolioHandler}>
             <Tag size="lg" variant="solid" colorScheme="teal">
@@ -69,10 +69,7 @@ const PortfolioTransactionPage = () => {
           </div>
         </div>
       </div>
-      <div className="portfolio-page-bottom">
-        <Heading size="md" className="portfolio-page-table-heading">
-          Your Asset Transactions
-        </Heading>
+      <div className="portfolio-page-bottom-transaction">
         {portfolioOb?.length !== 0 ? (
           <Table
             size="lg"

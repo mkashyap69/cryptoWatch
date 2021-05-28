@@ -26,7 +26,7 @@ const getCryptoDataFromDB = async (req, res) => {
   })
     .sort('createdAt')
     .select('data -_id ')
-    .cache(req.user._id);
+    //.cache(req.user._id);
 
   const todayPriceData = [];
   let particularCoinData;

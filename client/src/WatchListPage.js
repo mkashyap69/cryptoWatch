@@ -23,6 +23,7 @@ import { ArrowBackIcon } from '@chakra-ui/icons';
 import { useHistory } from 'react-router';
 import axios from 'axios';
 import { getRenderWatchListData } from './redux/actions/action';
+import './css/WatchList.css';
 
 const WatchListPage = () => {
   const [cryptoObject, setCryptoObject] = useState([]);
@@ -43,10 +44,7 @@ const WatchListPage = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const watchlistData = await axios.get(
-        'http://localhost:9000/api/v1/user/watchList',
-        config
-      );
+      const watchlistData = await axios.get('/api/v1/user/watchList', config);
       const watchListQueryIntoString =
         watchlistData.data.data.watchlist.toString();
 
@@ -62,7 +60,7 @@ const WatchListPage = () => {
   }, [watchListCryptoObject]);
 
   const goToHomePage = () => {
-    history.push('/market');
+    history.push('/');
   };
 
   const portfolioHandler = () => {

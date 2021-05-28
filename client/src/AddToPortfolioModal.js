@@ -16,6 +16,8 @@ import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { addToPortfolioTransactions } from './redux/actions/action';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { useHistory } from 'react-router';
+import './css/AddModal.css';
 
 const AddToPortfolioModal = ({ isOpen, onClose }) => {
   const [total, setTotal] = useState(0);
@@ -28,7 +30,7 @@ const AddToPortfolioModal = ({ isOpen, onClose }) => {
   const [coinPrice, setCoinPrice] = useState(0);
   const [symbolArray, setSymbolArray] = useState([]);
   const user = useSelector((state) => state.user.data);
- 
+  const history = useHistory();
 
   const dispatch = useDispatch();
   let coinNameObject = {};
@@ -42,7 +44,7 @@ const AddToPortfolioModal = ({ isOpen, onClose }) => {
       },
     };
     const { data } = await axios.get(
-      `http://localhost:9000/api/v1/apiData?sortKey=market_cap&limit=400`,
+      `/api/v1/apiData?sortKey=market_cap&limit=400`,
       config
     );
 

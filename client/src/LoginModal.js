@@ -42,7 +42,6 @@ const LoginModal = ({ isOpen, onClose }) => {
         status: 'success',
         duration: 2000,
       });
-      history?.push('/market');
     }
     if (error?.status === 'Error') {
       toast({
@@ -55,6 +54,7 @@ const LoginModal = ({ isOpen, onClose }) => {
 
   const onSubmit = async () => {
     dispatch(login(email, password));
+    //history.push('/');
   };
 
   return (

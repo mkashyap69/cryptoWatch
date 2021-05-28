@@ -91,20 +91,20 @@ const RenderTableData = ({ cryptoObject, OFFSET, PER_PAGE }) => {
           </Td>
           {crypto.quote.INR.percent_change_24h > 0 ? (
             <Td style={{ color: 'green' }} isNumeric>
-              ⬆️ {crypto.quote.INR.percent_change_24h}
+              ⬆️ {crypto.quote.INR.percent_change_24h?.toFixed(2)}
             </Td>
           ) : (
             <Td style={{ color: 'red' }} isNumeric>
-              ⬇️ {crypto.quote.INR.percent_change_24h}
+              ⬇️ {crypto.quote.INR.percent_change_24h?.toFixed(2)}
             </Td>
           )}
           {crypto.quote.INR.percent_change_30d > 0 ? (
             <Td style={{ color: 'green' }} isNumeric>
-              ⬆️ {crypto.quote.INR.percent_change_30d}
+              ⬆️ {crypto.quote.INR.percent_change_30d?.toFixed(2)}
             </Td>
           ) : (
             <Td style={{ color: 'red' }} isNumeric>
-              ⬇️ {crypto.quote.INR.percent_change_30d}
+              ⬇️ {crypto.quote.INR.percent_change_30d?.toFixed(2)}
             </Td>
           )}
         </Tr>

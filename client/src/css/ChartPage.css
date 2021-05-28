@@ -1,0 +1,72 @@
+.crypto-name {
+  font-weight: bolder;
+}
+
+.cryptoChart {
+  height: 83vh !important;
+  width: 90vw;
+}
+
+.chart-page {
+  height: 95vh !important;
+  width: 97vw;
+}
+
+.coin-stat {
+  width: 30vw;
+}
+
+.coin-information {
+  height: 15vh;
+  width: 95vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.coin-market {
+  height: 20vh;
+  width: 95vw;
+
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media only screen and (max-width: 500px) {
+  .coin-information {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: max-content;
+  }
+  .coin-market {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: max-content;
+  }
+  .rates-chart {
+    width: 100vw;
+  }
+}
+
+.coin-market_cap--info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.coin-market-percentage {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.coin-market-percentage--tag {
+  margin-left: 1.6rem;
+}
+.coin-market-cap--heading {
+  font-size: 0.7rem !important;
+}

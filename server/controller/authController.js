@@ -45,10 +45,11 @@ const login = async (req, res) => {
   user.password = undefined;
 
   res.cookie('ID', token, {
+    domain: 'cryptowatchserver67.herokuapp.com',
     httpOnly: true,
-    secure: false,
-    // process.env.NODE_ENV === 'production' ? true :
+    secure: true,
     maxAge: 1 * 60 * 60 * 1000,
+    sameSite: 'none',
   });
 
   res.status(200).json({
@@ -107,37 +108,48 @@ const signup = async (req, res) => {
 };
 
 const protect = async (req, res, next) => {
-  let token;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
-  ) {
-    token = req.headers.authorization.split(' ')[1];
-  }
+  console.log(req.cookies.ID, 'COOOKIIIIEEE');
+  try {
+    let token;
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith('Bearer')
+    ) {
+      token = req.headers.authorization.split(' ')[1];
+    }
 
-  if (!token) {
-    res.status(404).json({
-      status: 'Error',
-      message: 'You are not authorized to access this',
-    });
+    if (!token) {
+      res.status(404).json({
+        status: 'Error',
+        message: 'You are not authorized to access this',
+      });
+    }
+    jwt.verify = promisify(jwt.verify);
+    const decoded = await jwt.verify(token, process.env.SECRET_KEY);
+    const user = await User.findById(decoded.userId);
+    if (!user) {
+      res.status(404).json({
+        status: 'Error',
+        message: 'The user belonging to the token no longer exist',
+      });
+      return;
+    }
+    req.user = user;
+  } catch (err) {
+    console.log(err);
   }
-  jwt.verify = promisify(jwt.verify);
-  const decoded = await jwt.verify(token, process.env.SECRET_KEY);
-  const user = await User.findById(decoded.userId);
-  if (!user) {
-    res.status(404).json({
-      status: 'Error',
-      message: 'The user belonging to the token no longer exist',
-    });
-    return;
-  }
-  req.user = user;
 
   next();
 };
 
 const logout = async (req, res, next) => {
-  res.clearCookie('ID');
+  res.clearCookie('ID', {
+    domain: 'cryptowatchserver67.herokuapp.com',
+    httpOnly: true,
+    secure: true,
+    maxAge: 1 * 60 * 60 * 1000,
+    sameSite: 'none',
+  });
   res.send('done');
 };
 

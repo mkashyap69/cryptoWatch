@@ -22,6 +22,7 @@ import { useSelector } from 'react-redux';
 import { AiFillPieChart } from 'react-icons/ai';
 import RenderTableData from './RenderTableData';
 import axios from 'axios';
+import './css/Table.css';
 
 const MarketPriceTable = () => {
   const [cryptoObject, setCryptoObject] = useState();
@@ -30,7 +31,7 @@ const MarketPriceTable = () => {
   const history = useHistory();
   const user = useSelector((state) => state.user.data);
 
-  const PER_PAGE = 100;
+  const PER_PAGE = 30;
   let OFFSET = currentPage * PER_PAGE;
   const TOTAL_PAGE_COUNT = Math.ceil(cryptoObject?.length / PER_PAGE);
 
@@ -43,7 +44,7 @@ const MarketPriceTable = () => {
       },
     };
     const { data } = await axios.get(
-      `http://localhost:9000/api/v1/apiData?sortKey=${sortKey}`,
+      `/api/v1/apiData?sortKey=${sortKey}`,
       config
     );
 
@@ -69,48 +70,48 @@ const MarketPriceTable = () => {
 
   return (
     <div className="mainPage-bottom">
+      <div className="table-head">
+        <Heading size="lg" className="mainPage--heading">
+          Today's Cryptocurrency Prices
+        </Heading>
+        <div className="watchlist-tag" onClick={watchlistHandler}>
+          <Tag size="lg" variant="solid" colorScheme="teal">
+            <StarIcon color="white" />
+            <TagLabel>Watchlist</TagLabel>
+          </Tag>
+        </div>
+        <div className="portfolio-tag" onClick={portfolioHandler}>
+          <Tag size="lg" variant="solid" colorScheme="teal">
+            <Icon color="white" as={AiFillPieChart} />
+            <TagLabel>Portfolio</TagLabel>
+          </Tag>
+        </div>
+        <div>
+          <Menu>
+            <MenuButton
+              as={Button}
+              color="teal"
+              rightIcon={<ChevronDownIcon />}
+              size="md"
+            >
+              {sortKey ? `Sort By: ${sortKey}` : 'Sort By'}
+            </MenuButton>
+            <MenuList>
+              <MenuItem onClick={() => setSortKey('market_cap')}>
+                Market Cap
+              </MenuItem>
+              <MenuItem onClick={() => setSortKey('name')}>Name</MenuItem>
+              <MenuItem onClick={() => setSortKey('price')}>Price</MenuItem>
+              <MenuItem onClick={() => setSortKey('percent_change_24h')}>
+                % 24H
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </div>
+      </div>
+
       {cryptoObject ? (
         <>
-          <div className="table-head">
-            <Heading size="lg" className="mainPage--heading">
-              Today's Cryptocurrency Prices
-            </Heading>
-            <div className="watchlist-tag" onClick={watchlistHandler}>
-              <Tag size="lg" variant="solid" colorScheme="teal">
-                <StarIcon color="white" />
-                <TagLabel>Watchlist</TagLabel>
-              </Tag>
-            </div>
-            <div className="portfolio-tag" onClick={portfolioHandler}>
-              <Tag size="lg" variant="solid" colorScheme="teal">
-                <Icon color="white" as={AiFillPieChart} />
-                <TagLabel>Portfolio</TagLabel>
-              </Tag>
-            </div>
-            <div>
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  color="teal"
-                  rightIcon={<ChevronDownIcon />}
-                  size="md"
-                >
-                  {sortKey ? `Sort By: ${sortKey}` : 'Sort By'}
-                </MenuButton>
-                <MenuList>
-                  <MenuItem onClick={() => setSortKey('market_cap')}>
-                    Market Cap
-                  </MenuItem>
-                  <MenuItem onClick={() => setSortKey('name')}>Name</MenuItem>
-                  <MenuItem onClick={() => setSortKey('price')}>Price</MenuItem>
-                  <MenuItem onClick={() => setSortKey('percent_change_24h')}>
-                    % 24H
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            </div>
-          </div>
-
           <div className="rates-table">
             <Table
               size="md"
@@ -120,7 +121,7 @@ const MarketPriceTable = () => {
             >
               <Thead color="grey">
                 <Tr>
-                  <Th></Th>
+                  <Th>Watch</Th>
                   <Th>Rank</Th>
                   <Th>Time</Th>
                   <Th>Name / Symbol</Th>

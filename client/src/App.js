@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import './App.css';
+import './css/App.css';
 import MarketPriceTable from './Table';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ChartPage from './ChartPage';
@@ -27,7 +27,7 @@ function App() {
         <Switch>
           <Route
             exact
-            path="/market"
+            path="/"
             render={() => (user ? <MarketPriceTable /> : <HomePage />)}
           />
           <Route

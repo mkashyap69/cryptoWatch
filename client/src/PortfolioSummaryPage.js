@@ -19,6 +19,7 @@ import { Tooltip } from '@chakra-ui/tooltip';
 import axios from 'axios';
 import { Chart } from 'react-google-charts';
 import { Spinner } from '@chakra-ui/spinner';
+import './css/Portfolio.css'
 
 const PortfolioSummaryPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -45,7 +46,7 @@ const PortfolioSummaryPage = () => {
       },
     };
     const { data } = await axios.get(
-      `http://localhost:9000/api/v1/apiData?sortKey=market_cap&limit=400`,
+      `/api/v1/apiData?sortKey=market_cap&limit=400`,
       config
     );
 
@@ -70,7 +71,6 @@ const PortfolioSummaryPage = () => {
         }
         arr.push(newObj);
       });
-      console.log(arr);
 
       let chartArray = [['coin', 'holdings']];
 
@@ -103,7 +103,7 @@ const PortfolioSummaryPage = () => {
   };
 
   const goToHomePage = () => {
-    history.push('/market');
+    history.push('/');
   };
 
   const redirectToTransaction = (coinName) => {
@@ -138,22 +138,19 @@ const PortfolioSummaryPage = () => {
       <div className="portfolio-page-bottom">
         <div className="portfolio-page-chart">
           <Chart
-            width={'600px'}
-            height={'400px'}
+            width={'100%'}
+            height={'100%'}
             chartType="PieChart"
             loader={<Spinner />}
             data={chartArray}
             options={{
-              title: 'Portfolio Summary',
+              title: '',
               is3D: true,
             }}
             rootProps={{ 'data-testid': '2' }}
           />
         </div>
-        <div>
-          <Heading size="md" className="portfolio-page-table-heading">
-            Your Assets
-          </Heading>
+        <div className="portfolio-summary-table">
           {portfolioSummaryOb?.length !== 0 ? (
             <Table
               size="lg"

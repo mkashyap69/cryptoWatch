@@ -1,5 +1,5 @@
 import React from 'react';
-import './HomePage.css';
+import './css/HomePage.css';
 import image from './Crypto portfolio-amico.svg';
 import { Image } from '@chakra-ui/image';
 

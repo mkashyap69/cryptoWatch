@@ -1,0 +1,24 @@
+.watchlist-icon:hover {
+    transform: scale(1.4);
+    transition: all 0.4s;
+  }
+  
+  .watchlist-tag {
+    cursor: pointer;
+  }
+  
+  .noTransaction-alert {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .watchlist-tag:hover {
+    transform: scale(1.2);
+    transition: all 0.4s;
+  }
+  .watchlist-page-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    width: 35vw;
+  }
+  

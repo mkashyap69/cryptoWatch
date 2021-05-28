@@ -1,0 +1,73 @@
+.mainPage--heading {
+  margin: 5vh;
+}
+.mainPage-bottom {
+  height: 90vh;
+}
+
+.table-head {
+  height: max-content;
+  margin: 0vw 3vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 500px) {
+  .table-head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: max-content;
+  }
+}
+
+.rates-table {
+  height: 80%;
+  width: 90vw;
+  overflow: scroll;
+}
+thead {
+  color: white;
+  background: #2d797b;
+}
+
+tbody .crypto-name-cell {
+  cursor: pointer;
+}
+tbody .css-0:hover {
+  background-color: #f7fafd;
+}
+.css-1sa2h46 {
+  color: white !important;
+}
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin-top: 5vh;
+  height: 3%;
+}
+
+li:hover {
+  transform: scale(1.2);
+  transition: all 0.4s;
+}
+
+.pagination__link {
+  background: #2d797b none repeat scroll 0 0;
+  border: 1px solid white;
+  color: white;
+  outline: medium none;
+  padding: 15px;
+  text-decoration: none;
+}
+
+.pagination__link--active {
+  text-align: center;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 35%;
+  background: #2d797b;
+  color: white;
+}
